@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap_css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <h1>Lista de usuarios</h1>
+        <table id="usuarios" class="table table-bordered table-dark">
+        </table><!--Tabla para listar los usuarios-->
+
+        <button id="btn-nuevo" class="btn btn-primary">Nuevo usuario</button>
+
+        <div id="agregar-usuario" class="oculto">
+                <label for="usuario">
+                    Usuario:
+                    <input type="text" id="usuario-a">
+                </label><br>
+                <label for="usuario">
+                    Clave:
+                        <input type="text" id="clave-a">
+                    </label>
+    
+                    <button id="btn-agregar-usuario">Guardar</button>
+        </div>
+
+        <div id="editar-usuario" class="oculto">
+            <label for="usuario">
+                Usuario:
+                <input type="text" id="usuario-">
+            </label><br>
+            <label for="usuario">
+                Clave:
+                    <input type="text" id="clave-">
+                </label>
+
+                <button id="guardar-usuario">Guardar</button>
+        </div>
+
+        <h1>Lista de Excursiones</h1>
+    <table id="excursiones" class="table table-bordered table-dark">
+    </table><!--Tabla para listar las excursiones-->
+
+    
+
+    <div id="editar-excursion" class="oculto">
+            <label for="excursion">
+                    Usuario
+                    <select name="" id="usuario-select-editar"></select>
+            <label for="excursion">
+                Titulo:
+                <input type="text" id="excursion-titulo">
+            </label><br>
+            <label for="excursion">
+                Descripcion:
+                    <input type="text" id="excursion-descripcion">
+                </label>
+                <label for="excursion">
+                        Credito:
+                            <input type="text" id="excursion-credito">
+                </label>
+                <label for="excursion">
+                        Portada URL:
+                            <input type="text" id="excursion-portada">
+                </label>
+                <label for="excursion">
+                        Video URL:
+                            <input type="text" id="excursion-video">
+                </label>
+
+
+                <button id="guardar-excursion">Guardar</button>
+        </div>
+
+        <button id="btn-nueva-excursion" class="btn btn-primary">Nueva excursion</button>
+
+        <div id="agregar-excursion" class="oculto">
+            <label for="excursion">
+                Usuario
+                <select name="" id="usuario-select"></select>
+            </label>
+                <label for="excursion">
+                    Titulo:
+                    <input type="text" id="excursion-titulo-a">
+                </label><br>
+                <label for="excursion">
+                    Descripcion:
+                        <input type="text" id="excursion-descripcion-a">
+                    </label>
+                    <label for="excursion">
+                            Credito:
+                                <input type="text" id="excursion-credito-a">
+                    </label>
+                    <label for="excursion">
+                            Portada URL:
+                                <input type="text" id="excursion-portada-a">
+                    </label>
+                    <label for="excursion">
+                            Video URL:
+                                <input type="text" id="excursion-video-a">
+                    </label>
+                    <button id="guardar-nueva-excursion">Agregar</button>
+            </div>
+
+
+
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/objetos.js"></script>
+    <!--<script src="js/main.js"></script>-->
+    <script src="js/admin.js"></script>
+</body>
+</html>
