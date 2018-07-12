@@ -51,6 +51,9 @@
     }
 */
 
+#bienvenida{color: #f9e75e;font-family: 'Vibur', cursive;font-size: 46pt;font-weight: 900;text-align: center;margin: 50px}
+#bienvenida span {font-size: 52pt}
+
 /*centra en medio las cosas*/
     .centrado-porcentual {
     position: absolute;
@@ -106,3 +109,8 @@ transform: rotate(360deg);
     max-width: 100%;
 }
 
+.row{position: fixed;bottom: 5px;right: 0;}
+
+.row a{color: white; text-decoration: none;margin: 20px;font-weight: bold}
+
+.btn{background-color: #f73859;padding: 25px 50px;border-radius: 50px;border: none}
