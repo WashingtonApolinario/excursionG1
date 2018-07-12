@@ -46,6 +46,7 @@ $( document ).ready(function() {
 
             cargarExcursiones(); //Se cargan las excursiones del usuario
 
+            $('body').css("background-image","none");
         } else{
             //Si el usuario no existe se alerta
             alert("Datos incorrectos");

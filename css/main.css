@@ -109,8 +109,10 @@ transform: rotate(360deg);
     max-width: 100%;
 }
 
-.row{position: fixed;bottom: 5px;right: 0;}
+.adminLink{position: fixed;bottom: 5px;right: 0;}
 
-.row a{color: white; text-decoration: none;margin: 20px;font-weight: bold}
+.adminLink a{color: white; text-decoration: none;margin: 20px;font-weight: bold}
 
 .btn{background-color: #f73859;padding: 25px 50px;border-radius: 50px;border: none}
+
+.linkRegresar{text-align: center;display: block;color: white}
