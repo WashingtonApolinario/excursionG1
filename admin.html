@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    
     <div id="divUsuarios">
     <h1>Lista de usuarios</h1>
-        <table id="usuarios" class="table table-bordered table-light">
+        <table id="usuarios" class="table table-bordered table-dark">
         </table><!--Tabla para listar los usuarios-->
 
         <button id="btn-nuevo" class="btn btn-primary">Nuevo usuario</button>
@@ -31,7 +30,6 @@
                     <button id="btn-agregar-usuario">Guardar</button>
         </div>
     </div>
-    
 
         <div id="editar-usuario" class="oculto">
             <label for="usuario">
@@ -47,12 +45,11 @@
         </div>
 
     <div id="divExcursiones">
-    <h1>Lista de Excursiones</h1>
-    <table id="excursiones" class="table table-bordered table-light">
+        <h1>Lista de Excursiones</h1>
+    <table id="excursiones" class="table table-bordered table-dark">
     </table><!--Tabla para listar las excursiones-->
-        <button id="btn-nueva-excursion" class="btn btn-primary">Nueva excursion</button>
+    <button id="btn-nueva-excursion" class="btn btn-primary">Nueva excursion</button>
     </div>
-        
     
 
     <div id="editar-excursion" class="oculto">
@@ -73,7 +70,9 @@
                 </label>
                 <label for="excursion">
                         Portada URL:
-                            <input type="text" id="excursion-portada">
+                        <img src="#" width="100" height="100" id="excursion-portada">
+                        <input type='file' id="editarPortadaExcursion" />
+                            <!--<input type="text" id="excursion-portada">-->
                 </label>
                 <label for="excursion">
                         Video URL:
@@ -85,6 +84,7 @@
         </div>
 
         
+
 
         <div id="agregar-excursion" class="oculto">
             <label for="excursion">
@@ -105,8 +105,9 @@
                     </label>
                     <label for="excursion">
                             Portada URL:
-                                <input type="text" id="excursion-portada-a">
-                    </label>
+                            <input type='file' id="imgInp" />
+                            <img id="portada-excursion-agregar" src="#" alt="your image" width="100" height="100"/>
+                                <!--<input type="text" id="excursion-portada-a">-->                    </label>
                     <label for="excursion">
                             Video URL:
                                 <input type="text" id="excursion-video-a">
@@ -114,12 +115,24 @@
                     <button id="guardar-nueva-excursion">Agregar</button>
             </div>
 
+            <a id="downloadAnchorElem" class="oculto"></a>
+            
+
+            <button id="btn-descargar-json" class="btn btn-primary">Descargar JSON</button>
+
+            
+            
+                    <a href="index.html" class="btn btn-primary">Inicio </a>
+          
+            
+
 
 
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/objetos.js"></script>
-    <!--<script src="js/main.js"></script>-->
+    <script src="js/main.js"></script>
     <script src="js/admin.js"></script>
-        <a id="regresar" href="index.html">Regresar a inicio</a>
+
+    
 </body>
 </html>
