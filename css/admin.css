@@ -1,0 +1,4 @@
+body{background-image: none;background-color: #ededed}
+#divUsuarios{margin: 20px;padding: 20px; box-shadow: 1px 1px 15px gray;background-color: white}
+#divExcursiones{margin: 20px;padding: 20px; box-shadow: 1px 1px 15px gray;background-color: white}
+#regresar{font-size: 20pt; text-align: center;display: block; padding: 10px; text-decoration: none}

@@ -8,7 +8,7 @@ var arregloUsuarios;
 if(localStorage.getItem('arregloUsuarios') != null){
     arregloUsuarios = JSON.parse(localStorage.getItem('arregloUsuarios'));
     //Obtener los usuarios del localStorage
-    alert("arregloUsuarios");
+   // alert("arregloUsuarios");
 }
 
 dibujarTablaUsuarios();
@@ -45,7 +45,7 @@ function dibujarTablaExcursiones() {
 }
 
 function listarExcursiones() {
-alert("hola");
+        //alert("hola");
 
     $.each(arregloUsuarios, function(index, usuario){
 

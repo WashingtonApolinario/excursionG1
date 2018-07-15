@@ -7,10 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/bootstrap_css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
+    
+    <div id="divUsuarios">
     <h1>Lista de usuarios</h1>
-        <table id="usuarios" class="table table-bordered table-dark">
+        <table id="usuarios" class="table table-bordered table-light">
         </table><!--Tabla para listar los usuarios-->
 
         <button id="btn-nuevo" class="btn btn-primary">Nuevo usuario</button>
@@ -27,6 +30,8 @@
     
                     <button id="btn-agregar-usuario">Guardar</button>
         </div>
+    </div>
+    
 
         <div id="editar-usuario" class="oculto">
             <label for="usuario">
@@ -41,10 +46,13 @@
                 <button id="guardar-usuario">Guardar</button>
         </div>
 
-        <h1>Lista de Excursiones</h1>
-    <table id="excursiones" class="table table-bordered table-dark">
+    <div id="divExcursiones">
+    <h1>Lista de Excursiones</h1>
+    <table id="excursiones" class="table table-bordered table-light">
     </table><!--Tabla para listar las excursiones-->
-
+        <button id="btn-nueva-excursion" class="btn btn-primary">Nueva excursion</button>
+    </div>
+        
     
 
     <div id="editar-excursion" class="oculto">
@@ -76,7 +84,7 @@
                 <button id="guardar-excursion">Guardar</button>
         </div>
 
-        <button id="btn-nueva-excursion" class="btn btn-primary">Nueva excursion</button>
+        
 
         <div id="agregar-excursion" class="oculto">
             <label for="excursion">
@@ -112,5 +120,6 @@
     <script src="js/objetos.js"></script>
     <!--<script src="js/main.js"></script>-->
     <script src="js/admin.js"></script>
+        <a id="regresar" href="index.html">Regresar a inicio</a>
 </body>
 </html>
