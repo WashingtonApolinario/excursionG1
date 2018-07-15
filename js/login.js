@@ -46,7 +46,7 @@ $( document ).ready(function() {
 
             cargarExcursiones(); //Se cargan las excursiones del usuario
 
-            $('body').css("background-image","none");
+            
         } else{
             //Si el usuario no existe se alerta
             alert("Datos incorrectos");
@@ -54,12 +54,18 @@ $( document ).ready(function() {
         }
     });
 
-
-
-
     $(document).on('click','.item-excursion', function() {
         cargarExcursion(this.id)
         //Funcion para reconocer el click en cada excursion
+        //$('body').css("background-image","none");
+
+        //Detectar cuando termine de reproducirse el video
+        $('#main-video').on('ended',function(){
+
+            console.log('El video se ha terminado');
+            $("#continuar").show();
+
+        });
     });
 
     $("#salir").on("click", function(e){
@@ -78,6 +84,7 @@ $( document ).ready(function() {
         $("#menu").toggleClass("oculto");
         $("#excursiones").toggleClass("oculto");
 
+
         $.each( arregloUsuarios[posicion_usuario].excursiones, function(index, excursion){
 
             //Recorrer cada excursion y agregarlos visualmente
@@ -88,7 +95,6 @@ $( document ).ready(function() {
             <h2 class="bg-dark text-white">${excursion.titulo}
             
             <div class="imagen">
-            
             <img src=${excursion.portada} class='img-fluid'></div></div></h2></div></div>`).appendTo("#excursiones");
 
         });
@@ -96,14 +102,15 @@ $( document ).ready(function() {
 
     function validarUsuario(_usuario, _clave) {
         posicion_temp = -1
-        arregloUsuarios.forEach(function(usuario){
+
+        $.each(arregloUsuarios, function(index, usuario){
             //Buscar por cada usuario para comprobar usuario y clave.
             //Si existe, se guarda la posicion del usuario en 'posicion_temp' por defecto es -1 (en caso que no lo encuentre)
-
             if(usuario.usuario == _usuario && usuario.clave == _clave){
                 posicion_temp = arregloUsuarios.indexOf(usuario);
             }
-        });
+        })
+        //arregloUsuarios.forEach(function(usuario){});
 
         return posicion_temp;
     }
@@ -111,7 +118,7 @@ $( document ).ready(function() {
     //La funcion recibe la posicion de una excursion y la carga
     function cargarExcursion (posicion_excursion) {
 
-        let tmp = arregloUsuarios[posicion_usuario].excursiones[posicion_excursion];
+        let excursion = arregloUsuarios[posicion_usuario].excursiones[posicion_excursion];
 
         localStorage.setItem("posicion_excursion", posicion_excursion);//Guardar en localStorage la excursion actual
 
@@ -119,31 +126,42 @@ $( document ).ready(function() {
         $("#excursion").toggleClass("oculto")
 
 
-        $("#titulo").text(tmp.titulo)
-        $("#main-video").attr("src", tmp.video);
+        $("#titulo").text(excursion.titulo)
+        $("#main-video").attr("src", excursion.video);
         //$("#main-video2").attr("src", tmp.video);
         //Se agregar el titulo de la excursion y el video
         //
-        $("#descripcion").text(tmp.descripcion)
-        $("#credito").text(tmp.credito)
+        $("#descripcion").text(excursion.descripcion)
+        $("#credito").text(excursion.credito)
 
     }
 
     $("#continuar").on("click", function(){
 
+
         let excursion_actual = localStorage.getItem("posicion_excursion");
         //console.log(localStorage.getItem("posicion_excursion"))
-        $("#contenedor-pregunta").toggleClass("oculto");
+        //$("#contenedor-pregunta").toggleClass("oculto");
+        $("#contenedor-pregunta").show();
 
+        var audio = document.createElement("audio");
+        audio.src = arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.audio;
+        //arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.audio;
+        //console.log(arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.audio)
+        audio.play();
 
+        $("#pregunta").empty();
+        
 
         $.each(arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.opciones, function(index, opcion){
             //Recorrer por cada opcion de la pregunta
 
-            $(`<div class="jumbotron">
+            console.log(opcion)
+            $(`<label><div class="jumbotron bg-info w-75 p-3">
                 <div class="radio">
-            <label><input type="radio" name="opcion" value="${index}"> ${opcion}</label>
-          </div></div>`).appendTo("#pregunta");
+            <input type="radio" name="opcion" value="${index}"> ${opcion.descripcion}
+            <img src="${opcion.url}"/>
+          </div></div></label>`).appendTo("#pregunta");
           
         })
 
@@ -156,13 +174,14 @@ $( document ).ready(function() {
     $("#verificar-respuesta").on("click", function(){
 
         //Comprobar si la respuesta esta OK
-
         //console.log($('input[name=opcion]:checked').val()) //Esta linea toma el radio seleccionado
 
         let excursion_actual = localStorage.getItem("posicion_excursion");
         let opcion_elegida = $('input[name=opcion]:checked').val();
 
         let pregunta = arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta;
+
+        console.log(pregunta)
 
         //La respuesta est guarda en el objeto Pregunta.
 
@@ -175,7 +194,7 @@ $( document ).ready(function() {
 
 
             }else {
-                alert("La respuesta correcto era:" +pregunta.opciones[pregunta.respuesta])
+                alert("La respuesta correcta era:" +pregunta.opciones[pregunta.respuesta].descripcion)
                 location.reload();
             }
 
@@ -189,22 +208,27 @@ $( document ).ready(function() {
      * Opciones del video (RETROCEDER, ADELANTAR, PAUSAR, DETERNER Y PLAY)
      */
     $("#retroceder").on("click", function(e){
+        console.log("retroceder")
         $("#main-video")[0].currentTime -= 5;
     });
 
     $("#play").on("click", function(e){
+        console.log("play")
         $("#main-video")[0].play();
     });
 
     $("#stop").on("click", function(e){
+        console.log("stop")
         $("#main-video")[0].currentTime = 0;
     });
 
     $("#pause").on("click", function(e){
+        console.log("pause")
         $("#main-video")[0].pause();
     });
 
     $("#adelantar").on("click", function(e){
+        console.log("adelantar")
         $("#main-video")[0].currentTime += 5;
     });
 });

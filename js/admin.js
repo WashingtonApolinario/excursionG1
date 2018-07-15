@@ -8,7 +8,7 @@ var arregloUsuarios;
 if(localStorage.getItem('arregloUsuarios') != null){
     arregloUsuarios = JSON.parse(localStorage.getItem('arregloUsuarios'));
     //Obtener los usuarios del localStorage
-   // alert("arregloUsuarios");
+    //alert("arregloUsuarios");
 }
 
 dibujarTablaUsuarios();
@@ -45,9 +45,9 @@ function dibujarTablaExcursiones() {
 }
 
 function listarExcursiones() {
-        //alert("hola");
+//alert("hola");
 
-    $.each(arregloUsuarios, function(index, usuario){
+    $.each(arregloUsuarios, function(index_usuario, usuario){
 
         $.each(usuario.excursiones, function(indice_excursion, excursion){
 
@@ -58,8 +58,8 @@ function listarExcursiones() {
             .append($('<td>').append(excursion.credito))
             .append($('<td>').append(`<img src=${excursion.portada} class="lista-img">`))
             .append($('<td>').append(excursion.video))
-            .append($('<td>').append(`<button onclick=editarExcursion(${index},${indice_excursion})>Editar</button>`))
-            .append($('<td>').append(`<button onclick=eliminarExcursion(${index},${indice_excursion})>Eliminar</button>`))
+            .append($('<td>').append(`<button onclick=editarExcursion(${index_usuario},${indice_excursion})>Editar</button>`))
+            .append($('<td>').append(`<button onclick=eliminarExcursion(${index_usuario},${indice_excursion})>Eliminar</button>`))
             )
         })
     })
@@ -76,7 +76,8 @@ $("#guardar-excursion").click(function(){
         let titulo = $("#excursion-titulo").val();
         let descripcion = $("#excursion-descripcion").val();
         let credito = $("#excursion-credito").val();
-        let portada = $("#excursion-portada").val();
+        //let portada = $("#excursion-portada").val();
+        let portada = $("#excursion-portada").attr("src");
         let video = $("#excursion-video").val();
         let id_user = $("#usuario-select-editar").val();
 
@@ -106,7 +107,8 @@ $("#guardar-excursion").click(function(){
         $("#excursion-titulo").val("");
         $("#excursion-descripcion").val("");
         $("#excursion-credito").val("");
-        $("#excursion-portada").val("");
+        $("#excursion-portada").attr("src", "")
+        //$("#excursion-portada").val("");
         $("#excursion-video").val("");
 
 
@@ -119,7 +121,7 @@ $("#guardar-excursion").click(function(){
 function editarExcursion(index_usuario, index_excursion){
 
     $("#editar-excursion").show();
-    localStorage.setItem("index-edit", index_usuario);
+    localStorage.setItem("index-edit", index_usuario); //index del usuario
 
     localStorage.setItem("index-excursion-edit", index_excursion);
 
@@ -131,7 +133,7 @@ function editarExcursion(index_usuario, index_excursion){
 
     $("#excursion-credito").val(arregloUsuarios[index_usuario].excursiones[index_excursion].credito);
 
-    $("#excursion-portada").val(arregloUsuarios[index_usuario].excursiones[index_excursion].portada);
+    $("#excursion-portada").attr("src", arregloUsuarios[index_usuario].excursiones[index_excursion].portada);
 
     $("#excursion-video").val(arregloUsuarios[index_usuario].excursiones[index_excursion].video);
 
@@ -240,12 +242,17 @@ $("#guardar-nueva-excursion").click(function(){
     let titulo = $("#excursion-titulo-a").val();
     let descripcion = $("#excursion-descripcion-a").val();
     let credito = $("#excursion-credito-a").val();
-    let portada = $("#excursion-portada-a").val();
+    //let portada = $("#excursion-portada-a").val();
+
+    let img_portada = $("#portada-excursion-agregar").attr("src");
+
+    //console.log(img_portada)
+    
     let video = $("#excursion-video-a").val();
 
-    if(titulo!="" && descripcion !="" && credito !="" && portada !="" && video !=""){
+    if(titulo!="" && descripcion !="" && credito !="" && img_portada !="#" && video !=""){
         
-        let new_excursion = new Excursion(titulo, descripcion, credito, portada, video);
+        let new_excursion = new Excursion(titulo, descripcion, credito, img_portada, video);
 
         console.log(new_excursion)
         let index_usuario = $("#usuario-select").val();
@@ -289,4 +296,38 @@ function agregarUsuario(usuario) {
   * Control para agregar excursiones
   */
 
+ $("#btn-descargar-json").on('click', function() {
 
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem("arregloUsuarios"));
+    var dlAnchorElem = document.getElementById('downloadAnchorElem');
+    dlAnchorElem.setAttribute("href",     dataStr     );
+    dlAnchorElem.setAttribute("download", "scene.json");
+    dlAnchorElem.click();
+
+    /*let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(localStorage.getItem("arregloUsuarios"));
+
+    $("#downloadAnchorElem").attr("href", dataStr).attr("download", "archivo.json");
+    let elemento = $("#downloadAnchorElem");
+    elemento.click();*/
+})
+
+function readURL(input, id) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            console.log(e.target.result);
+
+            $('#'+id).attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imgInp").change(function(){
+    readURL(this, "portada-excursion-agregar");
+});
+
+$("#editarPortadaExcursion").change(function(){
+    readURL(this, "excursion-portada");
+})
