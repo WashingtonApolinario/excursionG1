@@ -3,16 +3,15 @@ var arregloExcursiones1 = [];
 var arregloExcursiones2 = [];
 
 
-let pregunta1 = new Pregunta("Despues de la B sigue?", "./audio/saludo.mp3",
-
+let pregunta1 = new Pregunta("Despues de la B sigue?", "./audio/audio.mp3",
 [ new Opcion('A',""), new Opcion('2',""), new Opcion('3',""), new Opcion('5',"")]
 , 2);
 
-let pregunta2 = new Pregunta("Adivina que animal hace MOO MOO seleccionalo", "./audio/audio.mp3", 
+let pregunta2 = new Pregunta("Adivina que animal hace MUU MUU seleccionalo", "./audio/audio.mp3",
 [ new Opcion('gallina',"./images/gallina.png"), new Opcion('vaca',"./images/vaca.png"), new Opcion('cerdo',"./images/cerdo.png"), new Opcion('oveja',"./images/oveja.png")]
 , 1);
 
-let pregunta3 = new Pregunta("¿Cual numero es el 2? seleccionalo", "./audio/audio.mp3",
+let pregunta3 = new Pregunta("¿Cuál número es el 2? seleccionalo", "./audio/preg_numero.mp3",
 [new Opcion('dos',"./images/dos.png"), new Opcion('cuatro',"./images/cuatro.png"), new Opcion('uno',"./images/uno.png"), new Opcion('cinco',"./images/cinco.png")]
 , 0);
 
@@ -49,7 +48,7 @@ arregloUsuarios.push(user3)
 
 //console.log(arregloUsuarios)
 if(localStorage.getItem('arregloUsuarios') == null){
-    
+
     localStorage.setItem('arregloUsuarios', JSON.stringify(arregloUsuarios));
     //Guardar el objeto en localStorage para tener acceso
 }
