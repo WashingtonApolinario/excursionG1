@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">    
 
-    <script src="js/bootstrap_js/bootstrap.js"></script>
+    <!--<script src="js/bootstrap_js/bootstrap.js"></script>-->
     
 </head>
 <body>
 
+<div class="container-fluid">
     <div id="login-form" class="oculto">
         <div class="card text-white bg-dark mb-2 centrado-porcentual" >
             <h3 class="card-header">Bienvenido! Ingresa tus datos</h3>
@@ -54,7 +55,9 @@
 
         <div class="col-12 col-8" id="vid">
             <div class="embed-responsive embed-responsive-21by9">
-                <video id="main-video" class="embed-responsive-item  video" src="video/mp4"></video>
+                <video id="main-video" class="embed-responsive-item video" controls="true">
+                    <source src="" type="video/mp4">
+                </video>
             </div>
         </div>
 
@@ -64,7 +67,7 @@
             <button id="stop" class="btn btn-default"><span class="fa fa-stop"></span></button>
             <button id="pause" class="btn btn-default"><span class="fa fa-pause"></span></button>
             <button id="adelantar" class="btn btn-default"><span class="fa fa-forward"></span></button>
-            <button type="button" id="continuar" class="btn btn-success"><span class="fa fa-question"></span>Pregunta</button>
+            <button type="button" id="continuar" class="btn btn-success oculto"><span class="fa fa-question"></span>Pregunta</button>
         </div>
 
         <div class="col-12 col-8 p-3" >
@@ -89,6 +92,9 @@
     <div class="row oculto p-3" id="contenedor-pregunta">
         <div class="col-12">
             <h1 id="pregunta-descripcion" class="bg-light">Pregunta</h1>
+            <audio id="audio-pregunta">
+                <source type="audio/mp3">
+            </audio>
             <form id="pregunta"></form>
         </div>
 
@@ -97,10 +103,9 @@
         </div>
     </div>
 
-   
+</div>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap_js/bootstrap.js"></script>
-
     <script src="js/objetos.js"></script>
     <script src="js/main.js"></script>
     <script src="js/login.js"></script>
