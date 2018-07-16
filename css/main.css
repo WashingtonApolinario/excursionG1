@@ -115,7 +115,8 @@ transform: rotate(360deg);
 
 .adminLink a{color: white; text-decoration: none;margin: 20px;font-weight: bold}
 
-.btn{background-color: #f73859;padding: 25px 50px;border-radius: 50px;border: none}
+.btnp{background-color: #f73859;padding: 25px 50px;border-radius: 50px;border: none}
+.btn{background-color: #f73859;padding: 10px 20px;border-radius: 20px;border: none}
 
 .linkRegresar{text-align: center;display: block;color: white}
 
