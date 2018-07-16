@@ -21,7 +21,9 @@
 
         <button id="btn-nuevo" class="btn btn-primary">Nuevo usuario</button>
 
-        <div id="agregar-usuario" class="oculto">
+        
+        <div id="fondoDivOculto" class="oculto agregar-usuario">
+            <div id="agregar-usuario" class="oculto ventPop">
                 <label for="usuario">
                     Usuario:
                     <input type="text" id="usuario-a">
@@ -33,9 +35,13 @@
 
                     <button id="btn-agregar-usuario">Guardar</button>
         </div>
+        </div>
+        
+        
     </div>
 
-        <div id="editar-usuario" class="oculto">
+    <div id="fondoDivOculto" class="oculto editar-usuario">
+        <div id="editar-usuario" class="oculto ventPop">
             <label for="usuario">
                 Usuario:
                 <input type="text" id="usuario-">
@@ -47,6 +53,9 @@
 
                 <button id="guardar-usuario">Guardar</button>
         </div>
+        
+    </div>
+        
 
     <div id="divExcursiones">
         <h1>Lista de Excursiones</h1>
@@ -56,7 +65,10 @@
     </div>
 
 
-    <div id="editar-excursion" class="oculto">
+    
+    
+    <div id="fondoDivOculto" class="oculto editar-excursion">
+        <div id="editar-excursion" class="oculto ventPop">
             <label for="excursion">
                     Usuario
                     <select name="" id="usuario-select-editar"></select>
@@ -86,8 +98,12 @@
 
                 <button id="guardar-excursion">Guardar</button>
         </div>
+    
+    </div>
 
-        <div id="agregar-excursion" class="oculto">
+        
+        <div id="fondoDivOculto" class="oculto agregar-excursion">
+        <div id="agregar-excursion" class="oculto ventPop">
             <label for="excursion">
                 Usuario
                 <select name="" id="usuario-select"></select>
@@ -115,6 +131,8 @@
                     </label>
                     <button id="guardar-nueva-excursion">Agregar</button>
             </div>
+        </div>
+        
 
             <a id="downloadAnchorElem" class="oculto"></a>
 
