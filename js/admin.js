@@ -120,7 +120,7 @@ $("#guardar-excursion").click(function(){
 
 function editarExcursion(index_usuario, index_excursion){
 
-    $("#editar-excursion").show();
+    //$("#editar-excursion").show();
     localStorage.setItem("index-edit", index_usuario); //index del usuario
 
     localStorage.setItem("index-excursion-edit", index_excursion);
@@ -146,6 +146,10 @@ function editarExcursion(index_usuario, index_excursion){
 
     $("#usuario-select-editar").val(index_usuario)
 
+    
+     var ventanaEdiExc = window.open("","","width=500,height=500");
+    var formExc = document.getElementById("editar-excursion");
+    ventanaEdiExc.document.body.appendChild(formExc);
 
 }
 
@@ -199,9 +203,16 @@ $("#guardar-usuario").click(function(){
 function editarUsuario(index) {
     localStorage.setItem("index-edit", index);
 
-    $("#editar-usuario").show();
+   //$("#editar-usuario").show();
+    
+   
+    
     $("#usuario-").val(arregloUsuarios[index].usuario);
     $("#clave-").val(arregloUsuarios[index].clave);
+    
+    var ventanaEdiUsu = window.open("","","width=500,height=500");
+    var formUsu = document.getElementById("editar-usuario");
+    ventanaEdiUsu.document.body.appendChild(formUsu);
 }
 function eliminarUsuario(index) {
     arregloUsuarios.splice(index, 1)
@@ -271,12 +282,18 @@ $("#guardar-nueva-excursion").click(function(){
 
 
 $("#btn-nuevo").click(function(){
-    $("#agregar-usuario").show();
+    //$("#agregar-usuario").show();
+    
+    var ventanaUsu = window.open("","","width=500,height=500");
+    var formUsu = document.getElementById("agregar-usuario");
+    ventanaUsu.document.body.appendChild(formUsu);
 })
 
 $("#btn-nueva-excursion").click(function(){
-    $("#agregar-excursion").show();
+    //$("#agregar-excursion").show();
 
+    
+    
     $("#usuario-select").empty();
 
     $.each(arregloUsuarios, function(index, usuario){
@@ -284,6 +301,11 @@ $("#btn-nueva-excursion").click(function(){
         $("#usuario-select").append('<option value="'+index+'"+>'+usuario.usuario+'</option>');
 
     })
+    
+    var ventanaExc = window.open("","","width=500,height=500");
+    var formExc = document.getElementById("agregar-excursion");
+    ventanaExc.document.body.appendChild(formExc);
+    
 })
 function agregarUsuario(usuario) {
     arregloUsuarios.push(usuario);
