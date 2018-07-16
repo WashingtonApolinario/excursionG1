@@ -7,7 +7,7 @@ let pregunta1 = new Pregunta("Despues de la B sigue?", "./audio/audio.mp3",
 [ new Opcion('A',""), new Opcion('2',""), new Opcion('3',""), new Opcion('5',"")]
 , 2);
 
-let pregunta2 = new Pregunta("Adivina que animal hace MUU MUU seleccionalo", "./audio/audio.mp3",
+let pregunta2 = new Pregunta("Adivina que animal hace MUU MUU seleccionalo", "./audio/preg_animal.mp3",
 [ new Opcion('gallina',"./images/gallina.png"), new Opcion('vaca',"./images/vaca.png"), new Opcion('cerdo',"./images/cerdo.png"), new Opcion('oveja',"./images/oveja.png")]
 , 1);
 

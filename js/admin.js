@@ -8,7 +8,7 @@ var arregloUsuarios;
 if(localStorage.getItem('arregloUsuarios') != null){
     arregloUsuarios = JSON.parse(localStorage.getItem('arregloUsuarios'));
     //Obtener los usuarios del localStorage
-    //alert("arregloUsuarios");
+
 }
 
 dibujarTablaUsuarios();
@@ -45,7 +45,7 @@ function dibujarTablaExcursiones() {
 }
 
 function listarExcursiones() {
-//alert("hola");
+//alert("ok..");
 
     $.each(arregloUsuarios, function(index_usuario, usuario){
 
@@ -88,7 +88,7 @@ $("#guardar-excursion").click(function(){
         let pregunta = arregloUsuarios[index_user].excursiones[index_excursion].pregunta;
 
         let tmp_excursion = new Excursion(titulo, descripcion, credito, portada, video, pregunta);
-        
+
         if(id_user!=index_user){
             arregloUsuarios[index_user].excursiones.splice(index_excursion, 1);
             //index_user = id_user;
@@ -160,8 +160,6 @@ function eliminarExcursion(index_usuario, index_excursion){
 }
 
 function listarUsuarios() {
-
-
     $.each(arregloUsuarios, function(index, usuario){
     $('#usuarios').append($('<tr>')
         .append($('<td>').append(usuario.usuario))
@@ -173,7 +171,6 @@ function listarUsuarios() {
 }
 
 $("#guardar-usuario").click(function(){
-
     if(localStorage.getItem("index-edit")!=null){
         let user = $("#usuario-").val();
         let clave = $("#clave-").val();
@@ -221,7 +218,7 @@ $("#btn-agregar-usuario").click(function(){
     let clave = $("#clave-a").val();
 
     if(user!="" && clave !=""){
-        
+
         let user_new = new Usuario(user, clave, []);
 
         arregloUsuarios.push(user_new);
@@ -247,11 +244,11 @@ $("#guardar-nueva-excursion").click(function(){
     let img_portada = $("#portada-excursion-agregar").attr("src");
 
     //console.log(img_portada)
-    
+
     let video = $("#excursion-video-a").val();
 
     if(titulo!="" && descripcion !="" && credito !="" && img_portada !="#" && video !=""){
-        
+
         let new_excursion = new Excursion(titulo, descripcion, credito, img_portada, video);
 
         console.log(new_excursion)
