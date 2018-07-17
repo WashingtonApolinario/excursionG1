@@ -13,6 +13,7 @@ if(localStorage.getItem('arregloUsuarios') != null){
 
 dibujarTablaUsuarios();
 dibujarTablaExcursiones();
+dibujarTablaPreguntas();
 
 function dibujarTablaUsuarios() {
 
@@ -64,6 +65,137 @@ function listarExcursiones() {
         })
     })
 }
+
+function dibujarTablaPreguntas() {
+
+    $("#preguntas").empty();
+
+    $('#preguntas').append($('<tr>')
+    .append($('<th>').append("Usuario"))
+        .append($('<th>').append("Excursion"))
+        .append($('<th>').append("Pregunta"))
+        .append($('<th>').append("Opcion 1"))
+        .append($('<th>').append("Opcion 2"))
+        .append($('<th>').append("Opcion 3"))
+        .append($('<th>').append("Opcion 4"))
+        /*.append($('<th>').append("Eliminar"))*/
+    )
+    listarPreguntas();
+}
+
+function listarPreguntas() {
+//alert("ok..");
+
+    $.each(arregloUsuarios, function(index_usuario, usuario){
+
+        $.each(usuario.excursiones, function(indice_excursion, excursion){
+
+            $('#preguntas').append($('<tr>')
+            .append($('<td>').append(usuario.usuario))
+            .append($('<td>').append(excursion.titulo))
+            .append($('<td>').append(excursion.pregunta.pregunta))
+            .append($('<td>').append(`<img src=${excursion.pregunta.opciones[0].url} class="lista-img">`))
+            .append($('<td>').append(`<img src=${excursion.pregunta.opciones[1].url} class="lista-img">`))
+            .append($('<td>').append(`<img src=${excursion.pregunta.opciones[2].url} class="lista-img">`))
+            .append($('<td>').append(`<img src=${excursion.pregunta.opciones[3].url} class="lista-img">`))
+            .append($('<td>').append(`<button onclick=editarPregunta(${index_usuario},${indice_excursion})>Editar</button>`))
+            //.append($('<td>').append(`<button onclick=eliminarPregunta(${index_usuario},${indice_excursion})>Eliminar</button>`))
+            )
+        })
+    })
+}
+
+
+function editarPregunta(index_usuario, index_excursion){
+
+    $("#editar-pregunta").show();
+    $(".editar-pregunta").show();
+    localStorage.setItem("index-edit", index_usuario); //index del usuario
+
+    localStorage.setItem("index-excursion-edit", index_excursion);
+
+    //console.log(arregloUsuarios[index_usuario].excursiones[index_excursion])
+
+    //$("#excursion-titulo-pregunta").val(arregloUsuarios[index_usuario].excursiones[index_excursion].titulo);
+
+    $("#pregunta-descripcion").val(arregloUsuarios[index_usuario].excursiones[index_excursion].pregunta.pregunta);
+
+    $("#pregunta-opcion-1").attr("src", arregloUsuarios[index_usuario].excursiones[index_excursion].pregunta.opciones[0].url);
+
+    $("#pregunta-opcion-2").attr("src", arregloUsuarios[index_usuario].excursiones[index_excursion].pregunta.opciones[1].url);
+
+    $("#pregunta-opcion-3").attr("src",arregloUsuarios[index_usuario].excursiones[index_excursion].pregunta.opciones[2].url);
+    //excursion.pregunta.opciones[0].url
+
+    $("#pregunta-opcion-4").attr("src", arregloUsuarios[index_usuario].excursiones[index_excursion].pregunta.opciones[3].url);
+
+    $("#usuario-select-editar").empty();
+
+}
+
+$("#guardar-pregunta").click(function(){
+
+
+    if(localStorage.getItem("index-excursion-edit")!=null && localStorage.getItem("index-edit") !=null){
+
+        /*
+        localStorage.setItem("index-edit", index_usuario); //index del usuario
+
+    localStorage.setItem("index-excursion-edit", index_excursion);
+    */
+
+        $("#editar-pregunta").hide();
+        $(".editar-pregunta").hide();
+
+
+        //let titulo = $("#excursion-titulo-pregunta").val();
+        let descripcion = $("#pregunta-descripcion").val();
+        let opcion1 = $("#pregunta-opcion-1").attr("src");
+        //let portada = $("#excursion-portada").val();
+        let opcion2 = $("#pregunta-opcion-2").attr("src");
+        let opcion3 = $("#pregunta-opcion-3").attr("src");
+        let opcion4 = $("#pregunta-opcion-4").attr("src");
+
+
+        let index_user = localStorage.getItem("index-edit");
+        let index_excursion = localStorage.getItem("index-excursion-edit");
+
+        let pregunta = arregloUsuarios[index_user].excursiones[index_excursion].pregunta;
+
+        /*let tmp_excursion = new Excursion(titulo, descripcion, credito, portada, video, pregunta);*/
+
+        let tmp_opcion1= new Opcion(pregunta.opciones[0].descripcion, opcion1)
+        let tmp_opcion2= new Opcion(pregunta.opciones[1].descripcion, opcion2)
+        let tmp_opcion3= new Opcion(pregunta.opciones[2].descripcion, opcion3)
+        let tmp_opcion4= new Opcion(pregunta.opciones[3].descripcion, opcion4)
+
+
+
+        let tmp_pregunta = new Pregunta(descripcion, pregunta.audio, [tmp_opcion1, tmp_opcion2, tmp_opcion3, tmp_opcion4], pregunta.respuesta)
+
+        arregloUsuarios[index_user].excursiones[index_excursion].pregunta = tmp_pregunta;
+
+        localStorage.setItem('arregloUsuarios', JSON.stringify(arregloUsuarios));
+
+        /*dibujarTablaExcursiones();*/
+        dibujarTablaPreguntas();
+
+        localStorage.removeItem("index-edit")
+        localStorage.removeItem("index-excursion-edit")
+
+        /*$("#excursion-titulo").val("");
+        $("#excursion-descripcion").val("");
+        $("#excursion-credito").val("");
+        $("#excursion-portada").attr("src", "")
+        //$("#excursion-portada").val("");
+        $("#excursion-video").val("");*/
+
+
+    }else{
+        alert("No hay excursion seleccionada para editar")
+    }
+
+})
 
 
 
@@ -249,6 +381,38 @@ $("#btn-agregar-usuario").click(function(){
 
 })
 
+$("#guardar-nueva-pregunta").click(function(){
+
+    let descripcion = $("#pregunta-descripcion").val();
+        let opcion1 = $("#pregunta-opcion-1-agregar").attr("src");
+        //let portada = $("#excursion-portada").val();
+        let opcion2 = $("#pregunta-opcion-2-agregar").attr("src");
+        let opcion3 = $("#pregunta-opcion-3-agregar").attr("src");
+        let opcion4 = $("#pregunta-opcion-4-agregar").attr("src");   
+
+
+    /*if(descripcion!="" && opcion1 !="" && opcion2 !="" && opcion3 !="" && opcion4 !=""){*/
+
+        let new_excursion = new Pregunta();
+
+        //let index_usuario = $("#usuario-select").val();
+        //arregloUsuarios[index_usuario].excursiones.push(new_excursion);
+
+
+        localStorage.setItem('arregloUsuarios', JSON.stringify(arregloUsuarios));
+
+        /*dibujarTablaExcursiones();*/
+        dibujarTablaPreguntas();
+
+        $("#agregar-pregunta").hide();
+        $(".agregar-pregunta").hide();
+
+    /*}else{
+        alert("Llene los campos")
+    }*/
+
+})
+
 $("#guardar-nueva-excursion").click(function(){
 
     let titulo = $("#excursion-titulo-a").val();
@@ -282,8 +446,6 @@ $("#guardar-nueva-excursion").click(function(){
         alert("Llene los campos")
     }
 
-    $("#fondoDivOculto").hide();
-
 })
 
 
@@ -308,6 +470,24 @@ $("#btn-nueva-excursion").click(function(){
     
     
 })
+
+$("#btn-nueva-pregunta").click(function(){
+    $("#agregar-pregunta").show();
+    $(".agregar-pregunta").show();
+
+    
+    
+    //$("#usuario-select").empty();
+
+    /*$.each(arregloUsuarios, function(index, usuario){
+
+        $("#usuario-select").append('<option value="'+index+'"+>'+usuario.usuario+'</option>');
+
+    })*/
+    
+})
+
+
 function agregarUsuario(usuario) {
     arregloUsuarios.push(usuario);
 }
@@ -352,8 +532,38 @@ $("#editarPortadaExcursion").change(function(){
     readURL(this, "excursion-portada");
 })
 
+$("#preguntaOpcion1").change(function(){
+    readURL(this, "pregunta-opcion-1")
+})
+
+$("#preguntaOpcion2").change(function(){
+    readURL(this, "pregunta-opcion-2")
+})
+
+$("#preguntaOpcion3").change(function(){
+    readURL(this, "pregunta-opcion-3")
+})
+
+$("#preguntaOpcion4").change(function(){
+    readURL(this, "pregunta-opcion-4")
+})
+$("#preguntaOpcion1Agregar").change(function(){
+    readURL(this, "pregunta-opcion-1-agregar")
+})
+$("#preguntaOpcion2Agregar").change(function(){
+    readURL(this, "pregunta-opcion-2-agregar")
+})
+$("#preguntaOpcion3Agregar").change(function(){
+    readURL(this, "pregunta-opcion-3-agregar")
+})
+
+$("#preguntaOpcion4Agregar").change(function(){
+    readURL(this, "pregunta-opcion-4-agregar")
+})
 
 // botones cancelar para cerrar modal
+
+
 
 $("#btnCancelarNuevoUsuario").on('click', function(){
     $("#agregar-usuario").hide();
@@ -373,4 +583,14 @@ $("#btnCancelarNuevaExcursion").on('click', function(){
 $("#btnCancelarEditarExcursion").on('click', function(){
     $("#editar-excursion").hide();
      $(".editar-excursion").hide();
+});
+
+$("#btnCancelarEditarPregunta").on('click', function(){
+    $("#editar-pregunta").hide();
+     $(".editar-pregunta").hide();
+});
+
+$("#btnCancelarNuevaPregunta").on('click', function(){
+    $("#agregar-pregunta").hide();
+     $(".agregar-pregunta").hide();
 });
