@@ -346,3 +346,26 @@ $("#imgInp").change(function(){
 $("#editarPortadaExcursion").change(function(){
     readURL(this, "excursion-portada");
 })
+
+
+// botones cancelar para cerrar modal
+
+$("#btnCancelarNuevoUsuario").on('click', function(){
+    $("#agregar-usuario").hide();
+     $(".agregar-usuario").hide();
+});
+
+$("#btnCancelarEditarUsuario").on('click', function(){
+    $("#editar-usuario").hide();
+     $(".editar-usuario").hide();
+});
+
+$("#btnCancelarNuevaExcursion").on('click', function(){
+    $("#agregar-excursion").hide();
+     $(".agregar-excursion").hide();
+});
+
+$("#btnCancelarEditarExcursion").on('click', function(){
+    $("#editar-excursion").hide();
+     $(".editar-excursion").hide();
+});
