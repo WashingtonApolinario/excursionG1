@@ -7,11 +7,11 @@ let pregunta1 = new Pregunta("Despues de la B sigue?", "./audio/audio.mp3",
 [ new Opcion('A',""), new Opcion('2',""), new Opcion('3',""), new Opcion('5',"")]
 , 2);
 
-let pregunta2 = new Pregunta("Adivina que animal hace MUU MUU seleccionalo", "./audio/preg_animal.mp3",
+let pregunta2 = new Pregunta("Adivina que animal hace MUU MUU seleccionalo", "./audio/audio.mp3",
 [ new Opcion('gallina',"./images/gallina.png"), new Opcion('vaca',"./images/vaca.png"), new Opcion('cerdo',"./images/cerdo.png"), new Opcion('oveja',"./images/oveja.png")]
 , 1);
 
-let pregunta3 = new Pregunta("¿Cuál número es el 2? seleccionalo", "./audio/preg_numero.mp3",
+let pregunta3 = new Pregunta("¿Cuál número es el 2? seleccionalo", "./audio/audio.mp3",
 [new Opcion('dos',"./images/dos.png"), new Opcion('cuatro',"./images/cuatro.png"), new Opcion('uno',"./images/uno.png"), new Opcion('cinco',"./images/cinco.png")]
 , 0);
 

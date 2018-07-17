@@ -65,6 +65,9 @@ function listarExcursiones() {
     })
 }
 
+
+
+
 $("#guardar-excursion").click(function(){
 
 
@@ -278,6 +281,8 @@ $("#guardar-nueva-excursion").click(function(){
     }else{
         alert("Llene los campos")
     }
+
+    $("#fondoDivOculto").hide();
 
 })
 

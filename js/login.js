@@ -127,7 +127,12 @@ $( document ).ready(function() {
 
 
         $("#titulo").text(excursion.titulo)
-        $("#main-video").attr("src", excursion.video);
+       // $("#main-video").attr("src", excursion.video);
+        $("#continuar").toggleClass("oculto")
+       var link = GetID(excursion.video);
+      
+      
+        $("#videoYT").attr("src", "http://www.youtube.com/embed/"+link);
         //$("#main-video2").attr("src", tmp.video);
         //Se agregar el titulo de la excursion y el video
         //
@@ -135,6 +140,19 @@ $( document ).ready(function() {
         $("#credito").text(excursion.credito)
 
     }
+
+    function GetID(url){
+  var ID = '';
+  url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+  if(url[2] !== undefined) {
+    ID = url[2].split(/[^0-9a-z_\-]/i);
+    ID = ID[0];
+  }
+  else {
+    ID = url;
+  }
+    return ID;
+}
 
     $("#continuar").on("click", function(){
 
