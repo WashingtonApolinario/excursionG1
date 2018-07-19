@@ -10,43 +10,43 @@ $( document ).ready(function() {
         //
         //Comprobar si ya ha iniciado sesion el usuario (Se carga la posicion del usuario del localStorage)
             // posicion_usuario = localStorage.getItem('arregloUsuarios');
-        
+
             //cargarExcursiones(); //Se llama a la funcion que lista las excursiones visualmente
             //
         if(localStorage.getItem('excursion_usuario') != null){
             //Comprobar si ya ha iniciado sesion el usuario (Se carga la posicion del usuario del localStorage)
             posicion_usuario = localStorage.getItem('excursion_usuario');
-            
+
             cargarExcursiones(); //Se llama a la funcion que lista las excursiones visualmente
         }else{
             // Si no esta logeado muestra el formulario de login
             $("#login-form").toggleClass("oculto");
         }
-        
-        }    
+
+        }
 
         //}else{
         // Si no esta logeado muestra el formulario de login
         // $("#login-form").toggleClass("oculto");
         // }
-    
+
     $("#login").on("click", function(e){
 
         //Evento que controla el click al inciar sesion
 
         let usuario = $("#user").val(); //Se toma el texto del input user
         let clave = $("#clave").val(); //Se toma el texto del input clave
-        
+
         posicion_usuario = validarUsuario(usuario, clave); // La funcion me devuelve un numero, que es la posicion del usuario en el arreglo, si no existe devuelve -1
 
         if(posicion_usuario != -1) {
             //Si la posicion es diferente de -1 entonces es un usuario correcto
-            
+
             localStorage.setItem('excursion_usuario',posicion_usuario); //Se guarda el usuario en el localStorage
 
             cargarExcursiones(); //Se cargan las excursiones del usuario
 
-            
+
         } else{
             //Si el usuario no existe se alerta
             alert("Datos incorrectos");
@@ -88,12 +88,12 @@ $( document ).ready(function() {
         $.each( arregloUsuarios[posicion_usuario].excursiones, function(index, excursion){
 
             //Recorrer cada excursion y agregarlos visualmente
-              //<h4 class="bg-light">${excursion.descripcion} 
+              //<h4 class="bg-light">${excursion.descripcion}
               //
             $(`<div class='col-6 mx-auto'>
             <div class='item-excursion' id=${index}>
             <h2 class="bg-dark text-white">${excursion.titulo}
-            
+
             <div class="imagen">
             <img src=${excursion.portada} class='img-fluid'></div></div></h2></div></div>`).appendTo("#excursiones");
 
@@ -125,12 +125,15 @@ $( document ).ready(function() {
         $("#excursiones").toggleClass("oculto")
         $("#excursion").toggleClass("oculto")
 
+        $("#continuar").toggleClass("oculto")
 
         $("#titulo").text(excursion.titulo)
-        $("#main-video").attr("src", excursion.video);
-        //$("#main-video2").attr("src", tmp.video);
-        //Se agregar el titulo de la excursion y el video
-        //
+
+        var link = convertirURL(excursion.video);
+        $("#main-video").attr("src", "https://www.youtube.com/embed/"+link+"?controls");
+
+
+
         $("#descripcion").text(excursion.descripcion)
         $("#credito").text(excursion.credito)
 
@@ -151,7 +154,7 @@ $( document ).ready(function() {
         audio.play();
 
         $("#pregunta").empty();
-        
+
 
         $.each(arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.opciones, function(index, opcion){
             //Recorrer por cada opcion de la pregunta
@@ -162,7 +165,7 @@ $( document ).ready(function() {
             <input type="radio" name="opcion" value="${index}"> ${opcion.descripcion}
             <img src="${opcion.url}"/>
           </div></div></label>`).appendTo("#pregunta");
-          
+
         })
 
         $("#pregunta-descripcion").text(arregloUsuarios[posicion_usuario].excursiones[excursion_actual].pregunta.pregunta);
@@ -170,6 +173,8 @@ $( document ).ready(function() {
         //$(`<ul>`).appendTo("#pregunta")
 
     });
+
+
 
     $("#verificar-respuesta").on("click", function(){
 
@@ -233,3 +238,17 @@ $( document ).ready(function() {
     });
 });
 
+//URL obtener el ultimo codigo
+
+function convertirURL(url){
+          var ID = '';
+          url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+          if(url[2] !== undefined) {
+            ID = url[2].split(/[^0-9a-z_\-]/i);
+            ID = ID[0];
+          }
+          else {
+            ID = url;
+          }
+            return ID;
+    }

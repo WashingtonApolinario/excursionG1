@@ -19,7 +19,7 @@ class Excursion {
         this.portada = portada;
         this.video = video;
         this.pregunta = _pregunta!=null ? _pregunta :
-            new Pregunta("¿Escriba su pregunta?", "./audio/audio.mp3",[ new Opcion('Opcion1',"./images/uno.jpg"), new Opcion('Opcion2',""), new Opcion('Opcion3',""), new Opcion('Opcion4',"")], 0)
+            new Pregunta("¿Escriba su pregunta?",[ new Opcion('Opcion1',"./images/uno.jpg"), new Opcion('Opcion2',""), new Opcion('Opcion3',""), new Opcion('Opcion4',"")], 0)
         ;
         //let saludo;
         //saludo = (a>b) ? "hola" : "chao"; //Operador ternario
@@ -32,9 +32,8 @@ class Excursion {
 }
 
 class Pregunta {
-    constructor(pregunta, audio, opciones, respuesta=0) {
+    constructor(pregunta, opciones, respuesta=0) {
         this.pregunta = pregunta;
-        this.audio = audio;
         this.opciones = opciones;
         this.respuesta = respuesta;
     }
